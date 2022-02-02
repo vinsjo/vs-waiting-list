@@ -1,42 +1,47 @@
 import { useState, useCallback } from 'react';
-
-import NameInput from './components/NameInput';
+import date from 'date-and-time';
+import { v4 as uuidv4 } from 'uuid';
+import InputForm from './components/InputForm';
 import NameList from './components/NameList';
-
+import { addEntry, removeEntry } from './functions/initFirebase';
 import './App.css';
+
 function App() {
-	const [names, setNames] = useState([]);
+	const [entries, setEntries] = useState([]);
 	const [inputValue, setInputValue] = useState('');
-	const handleInputChange = useCallback(
-		e => {
-			setInputValue(e.target.value);
-		},
+
+	useCallback(() => {}, [entries, setEntries]);
+
+	const onInputChange = useCallback(
+		e => setInputValue(e.target.value),
 		[inputValue, setInputValue]
 	);
-	const handleNameSubmit = useCallback(
-		e => {
-			if (inputValue.length) setNames([...names, inputValue]);
-			setInputValue('');
+	const onNameSubmit = useCallback(() => {
+		const value = inputValue.trim();
+		if (!value.length) return;
+		setEntries([...entries, addEntry(value)]);
+		setInputValue('');
+	}, [entries, setEntries, inputValue, setInputValue]);
+
+	const onDelete = useCallback(
+		uid => {
+			const i = entries.findIndex(entry => entry.uid === uid);
+			if (i < 0) return;
+			const remaining = [...entries];
+			removeEntry(remaining.splice(i, 1));
+			setEntries(remaining);
 		},
-		[names, setNames, inputValue, setInputValue]
-	);
-	const handleNameDelete = useCallback(
-		index => {
-			const newNames = [...names];
-			newNames.splice(index, 1);
-			setNames(newNames);
-		},
-		[names, setNames]
+		[entries, setEntries]
 	);
 
 	return (
 		<>
-			<NameInput
+			<InputForm
 				value={inputValue}
-				onChange={handleInputChange}
-				onClick={handleNameSubmit}
+				onInput={onInputChange}
+				onSubmit={onNameSubmit}
 			/>
-			<NameList names={names} onItemDelete={handleNameDelete} />
+			<NameList entries={entries} onItemDelete={onDelete} />
 		</>
 	);
 }

@@ -1,31 +1,24 @@
-import { List, ListItem, IconButton, ListItemText } from '@mui/material';
-import HighlightOffIcon from '@mui/icons-material/HighlightOff';
+import { BiXCircle } from 'react-icons/bi';
 
-function NameList({ names, onItemDelete }) {
-	const handleDelete = index => {
-		onItemDelete(index);
-	};
+function NameList({ entries, onItemDelete }) {
 	return (
-		<List className="name-list">
-			{names.map((name, i) => {
+		<ul className="name-list">
+			{entries.map(({ uid, time, name }) => {
 				return (
-					<ListItem
-						key={i}
-						secondaryAction={
-							<IconButton
-								edge="end"
-								aria-label="delete"
-								onClick={() => handleDelete(i)}
-							>
-								<HighlightOffIcon />
-							</IconButton>
-						}
-					>
-						<ListItemText primary={name} />
-					</ListItem>
+					<li key={`${uid}`}>
+						<div className="time">{time}</div>
+						<div className="name">{name}</div>
+						<button
+							type="button"
+							className="delete"
+							onClick={() => onItemDelete(uid)}
+						>
+							<BiXCircle />
+						</button>
+					</li>
 				);
 			})}
-		</List>
+		</ul>
 	);
 }
 
