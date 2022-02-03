@@ -1,9 +1,7 @@
 import { BiXCircle } from 'react-icons/bi';
 import EntryTimer from './EntryTimer';
-import date from 'date-and-time';
 
-function NameList({ users, onDelete, timeFormat = 'YY-MM-DD HH:mm:ss' }) {
-	const formatTime = ts => date.format(new Date(ts), timeFormat);
+function NameList({ users, onDelete }) {
 	return (
 		<ul className="name-list">
 			{Object.entries(users).map(([key, { name, timestamp }]) => {
