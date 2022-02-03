@@ -44,6 +44,7 @@ function App() {
 
 	const handleSubmit = useCallback(() => {
 		const name = inputValue.trim();
+		setInputValue('');
 		if (!name.length) return;
 		set(push(userListRef), {
 			name: name,

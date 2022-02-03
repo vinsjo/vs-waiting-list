@@ -1,8 +1,7 @@
 #root {
-	width: 100%;
+	width: 80ch;
 	height: 100%;
-	width: 100%;
-	max-width: 80ch;
+	max-width: 100%;
 	margin: 0 auto;
 	height: 100%;
 	display: flex;
@@ -76,6 +75,7 @@ button.delete svg {
 	background: rgb(50, 50, 50);
 	color: white;
 	font-weight: 600;
+	width: auto;
 	min-width: 12.5ch;
 }
 
@@ -86,27 +86,47 @@ button.delete svg {
 }
 
 .name-list li {
+	font-size: 1.5rem;
 	border-radius: 3px;
 	height: 3rem;
 	width: 100%;
 	background: rgba(255, 255, 255, 0.75);
 	display: flex;
-	justify-content: space-between;
+	justify-content: flex-start;
 	align-items: center;
 	color: black;
 	margin: 1rem 0;
 	overflow: hidden;
+	position: relative;
+	padding: 0 1em;
 }
 
-.name-list li .time {
+.name-list li .timer {
 	font-size: 1rem;
+	height: 100%;
+	min-width: 18ch;
+	padding: 0 1em;
 	background-color: rgba(0, 0, 0, 0.5);
 	color: white;
-	height: 100%;
-	display: flex;
 	justify-content: center;
 	align-items: center;
-	padding: 0.5em 1em;
+	position: absolute;
+	left: 0;
+	display: none;
+}
+
+.name-list li button {
+	position: absolute;
+	right: 0;
+}
+
+@media only screen and (min-width: 60ch) {
+	.name-list li {
+		justify-content: center;
+	}
+	.name-list li .timer {
+		display: flex;
+	}
 }
 
 @media (hover: hover) {

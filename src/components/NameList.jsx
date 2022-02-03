@@ -1,4 +1,5 @@
 import { BiXCircle } from 'react-icons/bi';
+import EntryTimer from './EntryTimer';
 import date from 'date-and-time';
 
 function NameList({ users, onDelete, timeFormat = 'YY-MM-DD HH:mm:ss' }) {
@@ -8,7 +9,7 @@ function NameList({ users, onDelete, timeFormat = 'YY-MM-DD HH:mm:ss' }) {
 			{Object.entries(users).map(([key, { name, timestamp }]) => {
 				return (
 					<li key={key}>
-						<div className="time">{formatTime(timestamp)}</div>
+						<EntryTimer start={timestamp} />
 						<div className="name">{name}</div>
 						<button
 							type="button"
