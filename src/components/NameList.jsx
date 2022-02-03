@@ -1,17 +1,19 @@
 import { BiXCircle } from 'react-icons/bi';
+import date from 'date-and-time';
 
-function NameList({ entries, onItemDelete }) {
+function NameList({ users, onDelete, timeFormat = 'YY-MM-DD HH:mm:ss' }) {
+	const formatTime = ts => date.format(new Date(ts), timeFormat);
 	return (
 		<ul className="name-list">
-			{entries.map(({ uid, time, name }) => {
+			{Object.entries(users).map(([key, { name, timestamp }]) => {
 				return (
-					<li key={`${uid}`}>
-						<div className="time">{time}</div>
+					<li key={key}>
+						<div className="time">{formatTime(timestamp)}</div>
 						<div className="name">{name}</div>
 						<button
 							type="button"
 							className="delete"
-							onClick={() => onItemDelete(uid)}
+							onClick={() => onDelete(key)}
 						>
 							<BiXCircle />
 						</button>
