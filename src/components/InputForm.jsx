@@ -10,10 +10,10 @@ function InputForm({ value, onInput, onSubmit }) {
 			<input
 				type="text"
 				value={value}
-				label="Enter your name"
+				placeholder="Your name"
 				onInput={e => onInput(e)}
 			/>
-			<button type="submit">Submit</button>
+			<button type="submit">Help me</button>
 		</form>
 	);
 }

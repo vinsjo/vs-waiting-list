@@ -20,6 +20,7 @@ body {
 	font-family: var(--main-font);
 	color: var(--text-color);
 	line-height: 160%;
+	padding: 1rem;
 }
 a {
 	color: inherit;

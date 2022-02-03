@@ -10,10 +10,17 @@ import {
 	onChildAdded,
 	onChildRemoved,
 } from 'firebase/database';
+import UIFx from 'uifx';
 import './App.css';
+import emptyFaviconUrl from './assets/favicon.svg';
+import helpFaviconUrl from './assets/favicon.help.svg';
+import alertSound from './assets/alert.wav';
+
+const alert = new UIFx(alertSound, { volume: 0.5 });
 
 function App() {
 	const userListRef = ref(db, 'users');
+	const [startTime] = useState(Date.now());
 	const [users, setUsers] = useState({});
 	const [inputValue, setInputValue] = useState('');
 
@@ -22,6 +29,7 @@ function App() {
 			onChildAdded(userListRef, data => {
 				if (!data || !data.exists() || users[data.key]) return;
 				setUsers({ ...users, [data.key]: data.val() });
+				if (Date.now() - startTime > 1000) alert.play();
 			}),
 		[db, users, setUsers]
 	);
@@ -36,6 +44,16 @@ function App() {
 			}),
 		[db, users, setUsers]
 	);
+
+	useEffect(() => {
+		const count = Object.keys(users).length;
+		document.title = !count
+			? 'Waiting List'
+			: `${count} is in Waiting List`;
+		document.querySelector('#favicon').href = !count
+			? emptyFaviconUrl
+			: helpFaviconUrl;
+	}, [users, setUsers]);
 
 	const handleInput = useCallback(
 		e => setInputValue(e.target.value),
