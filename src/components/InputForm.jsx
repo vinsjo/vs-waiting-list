@@ -1,12 +1,6 @@
 function InputForm({ value, onInput, onSubmit }) {
 	return (
-		<form
-			className="input-form"
-			onSubmit={e => {
-				e.preventDefault();
-				onSubmit(e);
-			}}
-		>
+		<form className="input-form" onSubmit={e => onSubmit(e)}>
 			<input
 				type="text"
 				value={value}
