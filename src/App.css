@@ -19,7 +19,6 @@
 	display: grid;
 	grid-template-columns: 1fr 15ch;
 	justify-content: center;
-	gap: 2rem;
 	padding: 1rem 0;
 }
 
@@ -47,25 +46,11 @@ button {
 	font-weight: 600;
 }
 
-button.delete {
-	background-color: rgba(0, 0, 0, 0.5);
-	display: block;
-	padding: 0;
-	height: 100%;
-	border-radius: 0;
-	padding: 0.2em 0.5em;
-}
-
-button.delete svg {
-	width: 100%;
-	height: 100%;
-	fill: white;
-}
-
 .input-form input {
 	width: 100%;
 	height: 100%;
 	background-color: rgba(255, 255, 255, 0.7);
+	border-radius: 3px 0 0 3px;
 }
 
 .input-form input:focus {
@@ -73,12 +58,12 @@ button.delete svg {
 }
 
 .input-form button {
-	background: rgb(50, 50, 50);
+	background: rgb(30, 30, 30);
 	height: 100%;
 	color: white;
 	font-weight: 600;
 	width: auto;
-	min-width: 12.5ch;
+	border-radius: 0 3px 3px 0;
 }
 
 .name-list {
@@ -114,12 +99,26 @@ button.delete svg {
 	align-items: center;
 	position: absolute;
 	left: 0;
+	right: auto;
 	display: none;
 }
 
-.name-list li button {
+.name-list button.delete {
+	background-color: rgb(0, 0, 0, 0.5);
+	display: block;
+	padding: 0;
+	height: 100%;
+	border-radius: 0;
+	padding: 0.2em 0.5em;
 	position: absolute;
 	right: 0;
+	left: auto;
+}
+
+button.delete svg {
+	width: 100%;
+	height: 100%;
+	fill: white;
 }
 
 @media only screen and (min-width: 60ch) {
@@ -132,14 +131,14 @@ button.delete svg {
 }
 
 @media (hover: hover) {
-	.input-form button:not(:disabled):hover {
-		transform: scale(1.05);
+	.input-form button:hover {
+		background-color: rgb(128, 128, 128);
 	}
+
 	button.delete:hover {
-		background-color: rgba(0, 0, 0, 0.8);
+		background-color: rgba(0, 0, 0, 0.75);
 	}
 	button.delete:hover svg {
-		transform: scale(1.1);
-		fill: rgb(230, 50, 30);
+		fill: rgb(230, 75, 50);
 	}
 }
