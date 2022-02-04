@@ -16,7 +16,7 @@ import emptyFaviconUrl from './assets/favicon.svg';
 import helpFaviconUrl from './assets/favicon.help.svg';
 import alertSound from './assets/alert.wav';
 
-const alert = new UIFx(alertSound, { volume: 0.5 });
+const alert = new UIFx(alertSound, { volume: 0.25 });
 
 function App() {
 	const userListRef = ref(db, 'users');
@@ -47,9 +47,7 @@ function App() {
 
 	useEffect(() => {
 		const count = Object.keys(users).length;
-		document.title = !count
-			? 'Waiting List'
-			: `${count} is in Waiting List`;
+		document.title = !count ? 'Waiting List' : `(${count}) - Waiting List`;
 		document.querySelector('#favicon').href = !count
 			? emptyFaviconUrl
 			: helpFaviconUrl;
