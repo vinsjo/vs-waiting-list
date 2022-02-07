@@ -1,0 +1,54 @@
+.button,
+.input {
+	font-family: inherit;
+	font-size: inherit;
+	outline: none;
+	border: none;
+	border-radius: var(--ui-border-radius);
+	max-height: var(--ui-max-height);
+	padding: var(--ui-padding);
+}
+
+.input {
+	background-color: var(--input-bg);
+}
+
+.input:focus {
+	background-color: var(--input-bg-focus);
+}
+
+.button,
+.button:disabled:hover {
+	background: var(--button-bg);
+	color: white;
+	font-weight: 600;
+}
+
+.button svg,
+.button:disabled:hover svg {
+	width: 100%;
+	height: 100%;
+	fill: var(--icon-fill);
+	vertical-align: middle;
+}
+
+.button:not(:disabled) {
+	cursor: pointer;
+}
+
+.input,
+.button,
+.button svg {
+	transition-property: opacity, transform, background-color, fill;
+	transition-duration: var(--ui-transition-duration);
+	transition-timing-function: ease;
+}
+
+@media (hover: hover) {
+	.button:hover {
+		background-color: var(--button-bg-hover);
+	}
+	.button:hover svg {
+		fill: var(--icon-fill-hover);
+	}
+}

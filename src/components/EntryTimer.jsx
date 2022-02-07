@@ -5,7 +5,7 @@ function EntryTimer({ start }) {
 	const [elapsedTime, setElapsedTime] = useState(0);
 	const [output, setOutput] = useState('');
 
-	const getOutputString = ms => {
+	function getOutputString(ms) {
 		const pluralStr = (val, str) => (val > 1 ? str + 's' : str);
 		const strOutput = (val, unit) => `${val} ${pluralStr(val, unit)} ago`;
 		const h = Math.floor(ms / 3600000) || 0;
@@ -13,7 +13,7 @@ function EntryTimer({ start }) {
 		const m = Math.floor(ms / 60000) % 60 || 0;
 		if (m >= 1) return strOutput(m, 'minute');
 		return 'Less than a minute ago';
-	};
+	}
 
 	useEffect(() => {
 		setOutput(getOutputString(elapsedTime));
@@ -26,7 +26,7 @@ function EntryTimer({ start }) {
 		return () => clearTimeout(timeout);
 	}, [startTime, elapsedTime, setElapsedTime]);
 
-	return <div className="timer">{output}</div>;
+	return <>{output}</>;
 }
 
 export default EntryTimer;

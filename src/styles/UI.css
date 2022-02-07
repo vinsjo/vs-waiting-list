@@ -1,0 +1,55 @@
+:root {
+	--ui-border-radius: 3px;
+	--ui-transition-duration: 0.15s;
+	--ui-padding: 0.5em 1em;
+	--ui-max-height: 3rem;
+}
+
+button,
+input {
+	font-family: inherit;
+	font-size: inherit;
+	outline: none;
+	border: none;
+	border-radius: var(--ui-border-radius);
+	max-height: var(--ui-max-height);
+	padding: var(--ui-padding);
+}
+
+input,
+button,
+button svg {
+	transition-property: opacity, transform, background-color, fill;
+	transition-duration: var(--ui-transition-duration);
+	transition-timing-function: ease;
+}
+
+button {
+	background: rgb(30, 30, 30);
+	color: white;
+	font-weight: 600;
+}
+
+button svg {
+	width: 100%;
+	height: 100%;
+	fill: white;
+	vertical-align: middle;
+}
+
+button:not(:disabled) {
+	cursor: pointer;
+}
+
+input:focus {
+	background-color: white;
+}
+
+@media (hover: hover) {
+	button:not(:disabled):hover {
+		background-color: rgb(128, 128, 128);
+	}
+	button:not(:disabled):hover svg {
+		fill: rgb(200, 200, 200);
+	}
+}

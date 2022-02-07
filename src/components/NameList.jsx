@@ -1,24 +1,31 @@
-import { BiXCircle } from 'react-icons/bi';
+import { BsFillCheckCircleFill } from 'react-icons/bs';
 import EntryTimer from './EntryTimer';
+import Button from './Button';
+import styles from '../styles/modules/NameList.module.css';
 
 function NameList({ users, onDelete }) {
+	function createListItem([key, value]) {
+		const { name, timestamp } = value;
+		return (
+			<li key={key} className={styles.listItem}>
+				<div className={styles.timer}>
+					<EntryTimer start={timestamp} />
+				</div>
+				<div>{name}</div>
+				<Button
+					className={styles.check}
+					value={key}
+					onClick={() => onDelete(key)}
+				>
+					<BsFillCheckCircleFill />
+				</Button>
+			</li>
+		);
+	}
+
 	return (
-		<ul className="name-list">
-			{Object.entries(users).map(([key, { name, timestamp }]) => {
-				return (
-					<li key={key}>
-						<EntryTimer start={timestamp} />
-						<div className="name">{name}</div>
-						<button
-							type="button"
-							className="delete"
-							onClick={() => onDelete(key)}
-						>
-							<BiXCircle />
-						</button>
-					</li>
-				);
-			})}
+		<ul className={styles.list}>
+			{Object.entries(users).map(createListItem)}
 		</ul>
 	);
 }

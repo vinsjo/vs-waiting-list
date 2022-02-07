@@ -1,0 +1,19 @@
+.form {
+	width: 100%;
+	display: grid;
+	grid-template-columns: 1fr 15ch;
+	justify-content: center;
+	margin-bottom: 2rem;
+}
+
+.input {
+	width: 100%;
+	height: 100%;
+	border-radius: var(--ui-border-radius) 0 0 var(--ui-border-radius);
+}
+
+.submit {
+	height: 100%;
+	width: auto;
+	border-radius: 0 var(--ui-border-radius) var(--ui-border-radius) 0;
+}

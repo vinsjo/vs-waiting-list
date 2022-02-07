@@ -12,7 +12,8 @@ import {
 	onChildRemoved,
 } from 'firebase/database';
 
-import './App.css';
+import './styles/App.css';
+
 import emptyFaviconUrl from './assets/favicon.svg';
 import helpFaviconUrl from './assets/favicon.help.svg';
 import alertSound from './assets/alert.wav';
@@ -23,7 +24,6 @@ function App() {
 	const userListRef = ref(db, 'users');
 	const [startTime] = useState(Date.now());
 	const [users, setUsers] = useState({});
-	const [inputValue, setInputValue] = useState('');
 
 	useEffect(() => {
 		return onChildAdded(userListRef, data => {
@@ -50,16 +50,9 @@ function App() {
 			: helpFaviconUrl;
 	}, [users, setUsers]);
 
-	const handleInput = useCallback(
-		e => setInputValue(e.target.value),
-		[inputValue, setInputValue]
-	);
-
 	const handleSubmit = useCallback(
-		e => {
-			e.preventDefault();
-			const name = inputValue.trim();
-			setInputValue('');
+		input => {
+			const name = input.trim();
 			if (!name.length) return;
 			set(push(userListRef), {
 				name: name,
@@ -70,15 +63,15 @@ function App() {
 				})
 				.catch(e => console.error(e));
 		},
-		[inputValue, setInputValue]
+		[users, setUsers]
 	);
 
 	const handleDelete = useCallback(
 		key => {
-			if (!users[key]) return;
+			if (!key || !users[key]) return;
 			remove(ref(db, `users/${key}`))
 				.then(() => {
-					console.log('removed ', users[key]);
+					console.log('removed ', users[key].name);
 				})
 				.catch(e => console.error(e));
 		},
@@ -87,11 +80,7 @@ function App() {
 
 	return (
 		<>
-			<InputForm
-				value={inputValue}
-				onInput={handleInput}
-				onSubmit={handleSubmit}
-			/>
+			<InputForm onSubmit={handleSubmit} />
 			<NameList users={users} onDelete={handleDelete} />
 		</>
 	);
