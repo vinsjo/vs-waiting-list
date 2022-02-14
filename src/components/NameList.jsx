@@ -9,7 +9,7 @@ function NameList({ users, onDelete }) {
 		return (
 			<li key={key} className={styles.listItem}>
 				<div className={styles.timer}>
-					<EntryTimer start={timestamp} />
+					<EntryTimer timestamp={timestamp} />
 				</div>
 				<div>{name}</div>
 				<Button
