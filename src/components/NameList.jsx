@@ -1,5 +1,5 @@
 import { BsFillCheckCircleFill } from 'react-icons/bs';
-import EntryTimer from './EntryTimer';
+import ElapsedTime from './ElapsedTime';
 import Button from './Button';
 import styles from '../styles/modules/NameList.module.css';
 
@@ -9,7 +9,7 @@ function NameList({ users, onDelete }) {
 		return (
 			<li key={key} className={styles.listItem}>
 				<div className={styles.timer}>
-					<EntryTimer timestamp={timestamp} />
+					<ElapsedTime timestamp={timestamp} />
 				</div>
 				<div>{name}</div>
 				<Button
@@ -25,7 +25,9 @@ function NameList({ users, onDelete }) {
 
 	return (
 		<ul className={styles.list}>
-			{Object.entries(users).map(createListItem)}
+			{Object.entries(users)
+				.sort((a, b) => a[1].timestamp - b[1].timestamp)
+				.map(createListItem)}
 		</ul>
 	);
 }

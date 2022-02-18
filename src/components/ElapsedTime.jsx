@@ -3,7 +3,7 @@ import dayjs from 'dayjs';
 import RelativeTime from 'dayjs/plugin/relativeTime';
 dayjs.extend(RelativeTime);
 
-function EntryTimer({ timestamp, interval = 5000 }) {
+function ElapsedTime({ timestamp, interval = 15000 }) {
 	const [start] = useState(
 		dayjs(timestamp).isValid() ? dayjs(timestamp) : dayjs()
 	);
@@ -17,4 +17,4 @@ function EntryTimer({ timestamp, interval = 5000 }) {
 	return <>{start.from(now)}</>;
 }
 
-export default EntryTimer;
+export default ElapsedTime;

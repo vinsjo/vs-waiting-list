@@ -1,4 +1,4 @@
-import { classNames } from '../functions/helpers';
+import { classNames } from '../utils';
 import styles from '../styles/modules/UI.module.css';
 
 function Button({ children, className, value, onClick, type = 'button' }) {
